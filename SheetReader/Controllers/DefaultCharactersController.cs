@@ -19,7 +19,8 @@ namespace SheetReader.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Dictionary<string, string>>> Get()
+        public ActionResult<GeneralResponse> Get()
+        //public ActionResult<IEnumerable<Dictionary<string, string>>> Get()
         {
             GoogleSheetJSON jobject = null;
             using (WebClient wc = new WebClient())
@@ -54,7 +55,10 @@ namespace SheetReader.Controllers
                 }
             }
 
-            return new List<Dictionary<string,string>>(chars.Values);
+            return new GeneralResponse
+            {
+                characters = new List<Dictionary<string, string>>(chars.Values)
+            };
         }
 
         //// GET api/values/5
