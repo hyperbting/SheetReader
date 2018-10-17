@@ -51,6 +51,15 @@ namespace SheetReader.Controllers
                     if (!chars.ContainsKey(idx))
                         chars[idx] = new Dictionary<string, string>();
 
+                    if (targetField.StartsWith("attribute"))
+                    {
+                        if(!chars[idx].ContainsKey("attribute"))
+                            chars[idx]["attribute"]="";
+
+                        chars[idx]["attribute"] += targetField.Replace("attribute", "") + ":"+ kvpair.Value+",";
+                        continue;
+                    }
+
                     chars[idx].Add(targetField, kvpair.Value);
                 }
             }
