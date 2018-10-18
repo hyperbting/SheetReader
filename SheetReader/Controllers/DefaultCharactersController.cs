@@ -45,11 +45,14 @@ namespace SheetReader.Controllers
                     if (!kvpair.Key.Contains("row"))
                         continue;
 
-                    if (!Int32.TryParse(kvpair.Key.Replace("row",""), out int idx))
+                    string userID = kvpair.Key.Replace("row", "");
+                    if (!Int32.TryParse(userID, out int idx))
                         continue;
 
                     if (!chars.ContainsKey(idx))
                         chars[idx] = new Dictionary<string, string>();
+
+                    chars[idx]["id"] = userID;
 
                     bool isAttributeOrBuff = false;
                     foreach (var prefixword in new List<string>() { "attribute", "buff"})
